@@ -9,6 +9,11 @@ verify_ssl = true
 django = "==3.0.7"
 psycopg2 = "==2.8.5"
 django-environ = "*"
+django-extensions = "==3.0.2"
+pydotplus = "*"
+ipython = "*"
+werkzeug = "*"
+pre-commit = "*"
 
 [requires]
 python_version = "3.8"
