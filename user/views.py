@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django_registration.backends.one_step.views import RegistrationView
 
-# Create your views here.
+from user.forms import RegistrationForm
+
+
+class CustomRegistrationView(RegistrationView):
+    form_class = RegistrationForm
+    success_url = '/'

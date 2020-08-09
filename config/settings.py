@@ -25,13 +25,14 @@ ALLOWED_HOSTS: List[str] = []
 
 INSTALLED_APPS = [
     'user',
+    'django_registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions'
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
