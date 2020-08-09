@@ -1,8 +1,8 @@
 from typing import List
 
-import django.urls.resolvers.URLPattern
+from django.urls.resolvers import URLPattern
 
 app_name = 'user'
 
-urlpatterns: List[django.urls.resolvers.URLPattern] = [
+urlpatterns: List[URLPattern] = [
 ]

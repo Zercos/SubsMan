@@ -45,7 +45,7 @@ class User(AbstractUser):
     username = None
     email = models.EmailField('email address', unique=True, null=False, blank=False, db_index=True,
                               error_messages={'unique': _("A user with this email already exists.")})
-    date_updated = models.DateTimeField(_('date updated'))
+    date_updated = models.DateTimeField(_('date updated'), auto_now=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS: List[str] = []
