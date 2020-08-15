@@ -118,3 +118,8 @@ MEDIA_URL = '/media/'
 
 # Custom user model
 AUTH_USER_MODEL = 'user.User'
+
+# Login
+LOGIN_URL = 'user:login'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

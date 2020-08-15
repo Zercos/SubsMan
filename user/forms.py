@@ -1,6 +1,7 @@
 import logging
 
 from django import forms
+from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UsernameField, UserCreationForm as DjangoRegistrationForm
 from django.core.mail import send_mail
 from django_registration import validators
@@ -35,3 +36,27 @@ class RegistrationForm(DjangoRegistrationForm):
         message = 'Welcome to SubsMan, the subscription management system.'
         send_mail(subject='SubsMan welcome', message=message, from_email='site@subsman.com',
                   recipient_list=(self.cleaned_data.get('email'),), fail_silently=True)
+
+
+class AuthenticationForm(forms.Form):
+    email = forms.EmailField(label='Email')
+    password = forms.CharField(strip=False, widget=forms.PasswordInput)
+
+    def __init__(self, request=None, *args, **kwargs):
+        self.request = request
+        self.user = None
+        super().__init__(*args, **kwargs)
+
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        password = self.cleaned_data.get('password')
+
+        if email is not None and password:
+            self.user = authenticate(request=self.request, email=email, password=password)
+            if self.user is None:
+                raise forms.ValidationError('Invalid email or password.')
+            logger.info(f'Authenticate successfully {email}')
+            return self.cleaned_data
+
+    def get_user(self):
+        return self.user
