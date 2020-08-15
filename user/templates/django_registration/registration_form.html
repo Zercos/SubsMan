@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}Sign up {{ block.super }}{% endblock %}
+{% block content %}
+    <h2>Sign up</h2>
+
+    <div class="ui tiny three steps">
+        <div class="active step account-info">
+            <i class="file alternate outline icon"></i>
+            <div class="content">
+                <div class="title">Account Info</div>
+                <div class="description">Enter your account details</div>
+            </div>
+        </div>
+        <div class="step company-info">
+            <i class="building outline icon"></i>
+            <div class="content">
+                <div class="title">Company Info</div>
+                <div class="description">Enter your company info</div>
+            </div>
+        </div>
+        <div class="disabled step account-verification">
+            <i class="envelope open outline icon"></i>
+            <div class="content">
+                <div class="title">Verification</div>
+                <div class="description">Verify your data</div>
+            </div>
+        </div>
+    </div>
+    <form method="post" class="ui form registration">
+        {% csrf_token %}
+        <div id="account-info">
+            <h4 class="ui header">Account details</h4>
+            {% if form.errors %}
+                <div id="error_explanation">
+                    <h2>Errors prohibited this user from being saved:</h2>
+                    <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error|escape }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="field">
+                {{ form.email.label_tag }}
+                <input type="email" class="form-control {% if form.email.errors %}error{% endif %}" id="id_email"
+                       name="email" placeholder="Your email" value="{{ form.email.value|default:'' }}">
+            </div>
+            <div class="field">
+                {{ form.password1.label_tag }}
+                <input type="password" class="{% if form.password1.errors %}error{% endif %}"
+                       id="id_password1" name="password1" value="{{ form.password1.value|default:'' }}">
+            </div>
+            <div class="field">
+                {{ form.password2.label_tag }}
+                <input type="password" class="{% if form.password2.errors %}error{% endif %}"
+                       id="id_password2" name="password2" value="{{ form.password2.value|default:'' }}">
+            </div>
+            <div class="field">
+                {{ form.first_name.label_tag }}
+                <input type="text" class="{% if form.first_name.errors %}error{% endif %}"
+                       id="first_name" name="first_name" value="{{ form.first_name.value|default:'' }}">
+            </div>
+            <div class="field">
+                {{ form.last_name.label_tag }}
+                <input type="text" class="{% if form.last_name.errors %}error{% endif %}"
+                       id="last_name" name="last_name" value="{{ form.last_name.value|default:'' }}">
+            </div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <input class="ui button green" type="submit" name="commit" value="Submit"/>
+    </form>
+    <div class="ui divider"></div>
+{% endblock %}
