@@ -1,0 +1,9 @@
+<div class="ui inverted left vertical sidebar menu push visible" style="">
+    <a class="item {% if request.resolver_match.url_name == '' %}active{% endif %}" href="/">Dashboard</a><br>
+    <a class="item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="#">My account</a>
+    <a class="item {% if request.resolver_match.url_name == 'invoices' %}active{% endif %}" href="#">My invoices</a>
+    <a class="item {% if request.resolver_match.url_name == 'users' %}active{% endif %}" href="#">Users</a>
+    <a class="item {% if request.resolver_match.url_name == 'payment_sources' %}active{% endif %}" href="#">
+        Payment Sources
+    </a>
+</div>

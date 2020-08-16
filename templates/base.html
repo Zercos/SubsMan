@@ -12,12 +12,20 @@
     <title>{% block title %}SubsMan management system{% endblock %}</title>
 </head>
 <body>
-<div class="ui visible inverted left vertical sidebar default">
-    <div class="welcome">Welcome to SubsMan!</div>
-    <div class="infotext">Please login or create new account to continue with product checkout.</div>
-</div>
+{% if user.is_authenticated %}
+    {% include 'navigation.html' %}
+{% else %}
+    <div class="ui visible inverted left vertical sidebar default">
+        <div>
+            <a href="/"><img src="{% static "logo.png" %}" class="nhm-logo" alt="logo" style="height: 100px; width: 100px"/></a>
+        </div>
+        <div class="welcome">Welcome to SubsMan!</div>
+        <div class="infotext">Please login or create new account to continue with product checkout.</div>
+    </div>
+{% endif %}
 <div class="pusher">
     <div class="ui container">
+        {% if user.is_authenticated %}{% include 'header.html' %}{% endif %}
         <div class="ui grid padded" style="padding: 0 10px;">
             <div class="sixteen wide column">
                 <div class="ui segment">
@@ -31,6 +39,7 @@
 <script src="{% static "js/jquery.min.js" %}"></script>
 <script src="{% static "js/popper.min.js" %}"></script>
 <script src="{% static "js/semantic.min.js" %}"></script>
+<script src="{% static "js/index.js" %}" type="module"></script>
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 </body>
 </html>
