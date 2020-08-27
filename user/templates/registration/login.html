@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Log in {{ block.super }}{% endblock %}
+{% block content %}
+    <h2 style="font-weight: normal">Log in</h2>
+
+    <form method="post" class="ui form" id="user_login">
+        {% csrf_token %}
+        <div class="field">
+            {{ form.email.label_tag }}
+            <input type="email" class="form-control {% if form.email.errors %}error{% endif %}" id="id_email"
+                   name="email" placeholder="Your email" value="{{ form.email.value|default:'' }}">
+        </div>
+        <div class="field">
+            {{ form.password.label_tag }}
+            <input type="password" class="{% if form.password1.errors %}error{% endif %}"
+                   id="id_password" name="password" autocomplete="off">
+        </div>
+
+        <div class="actions">
+            <input type="submit" name="commit" value="Log in" class="ui primary button" data-disable-with="Log in"/>
+        </div>
+        <div class="ui divider"></div>
+    </form>
+{% endblock %}

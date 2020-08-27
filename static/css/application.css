@@ -1,0 +1,112 @@
+h1, h2, h3, h4, h5 {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+p, ol, ul, td {
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+pre {
+    background-color: #eee;
+    padding: 10px;
+    font-size: 11px;
+}
+
+body > .pusher {
+    background: #f4f4f4 !important;
+}
+
+.ui.container {
+    width: 1127px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.ui.sidebar.visible ~ .pusher {
+    width: calc(100% - 260px);
+}
+
+.ui.inverted, .ui.inverted.menu {
+    background: #273f5b;
+    color: #fff;
+    text-align: right;
+}
+
+.ui.inverted .nhm-logo, .ui.inverted.menu .nhm-logo {
+    height: 73px;
+    margin: 30px 20px 10px;
+}
+
+.ui.inverted .logo, .ui.inverted.menu .logo {
+    height: 28px;
+    margin: 0 20px 10px;
+}
+
+.ui.inverted .welcome, .ui.inverted.menu .welcome {
+    font-size: 18px;
+    margin: 20px 20px 20px;
+}
+
+.ui.inverted .infotext, .ui.inverted.menu .infotext {
+    font-size: 14px;
+    margin-right: 20px;
+}
+
+.ui.inverted .app-version, .ui.inverted.menu .app-version {
+    font-size: 14px;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+div.field, div.actions {
+    margin-bottom: 10px;
+}
+
+#notice {
+    color: green;
+}
+
+#error_explanation {
+    width: 450px;
+    border: 2px solid red;
+    padding: 7px 7px 0;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+}
+
+#error_explanation h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px -7px 0;
+    background-color: #c00;
+    color: #fff;
+}
+
+#error_explanation ul li {
+    font-size: 12px;
+    list-style: square;
+}
+
+label {
+    display: block;
+}
+
+.field_with_errors {
+    padding: 2px;
+    background-color: red;
+    display: table;
+}
+
+form.ui.form.registration .field label {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+form#user_login .field label {
+    font-size: 13px;
+    font-weight: normal;
+}
