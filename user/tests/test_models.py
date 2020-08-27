@@ -1,6 +1,7 @@
 from django.test import TestCase
 
-from user.models import User
+from user.models import User, Address
+from user.tests.factories import AddressFactory
 
 
 class TestModels(TestCase):
@@ -12,8 +13,12 @@ class TestModels(TestCase):
         self.assertFalse(test_user.is_superuser)
 
     def test_create_superuser(self):
-        super_user = User.objects.create_superuser(email='super@mail.com', password='Password1!', first_name='Jonh',
+        super_user = User.objects.create_superuser(email='super@mail.com', password='Password1!', first_name='John',
                                                    last_name='Smith')
         self.assertTrue(User.objects.filter(email='super@mail.com').exists())
         self.assertTrue(super_user.is_staff)
         self.assertTrue(super_user.is_superuser)
+
+    def test_create_address(self):
+        address = AddressFactory()
+        self.assertTrue(Address.objects.filter(company=address.company, id=address.id).exists())

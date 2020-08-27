@@ -230,3 +230,12 @@ form#user_login .field label {
 .full {
     width: 100%;
 }
+
+a, a:visited {
+    color: #08b89d;
+}
+
+a:hover {
+    color: #08b89d;
+    text-decoration: underline;
+}

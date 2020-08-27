@@ -11,3 +11,18 @@ class UserFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = models.User
+
+
+class AddressFactory(factory.django.DjangoModelFactory):
+    user = factory.SubFactory(UserFactory)
+    company = factory.Faker('company')
+    phone = factory.faker.Faker('phone_number')
+    city = factory.faker.Faker('city')
+    state = factory.faker.Faker('state')
+    country = factory.faker.Faker('country')
+    company_address = factory.Faker('address')
+    contact_email = factory.Faker('email')
+    postcode = factory.Faker('postcode')
+
+    class Meta:
+        model = models.Address
