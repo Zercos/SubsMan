@@ -60,3 +60,11 @@ class AuthenticationForm(forms.Form):
 
     def get_user(self):
         return self.user
+
+
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = models.Address
+        fields = ['user', 'business', 'company', 'company_address', 'company_address2', 'city', 'state', 'postcode',
+                  'country', 'phone', 'mobile_phone', 'contact_firstname', 'contact_email', 'contact_lastname',
+                  'contact_title', 'tax_number', 'for_billing']

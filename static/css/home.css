@@ -1,0 +1,54 @@
+.basket .ui-widget.ui-widget-content {
+    border: none !important;
+    background: #bababa !important;
+    border-radius: 2px !important;
+    height: 3px !important;
+}
+
+.basket .ui-state-default, .basket .ui-widget-content .ui-state-default, .basket .ui-widget-header .ui-state-default, .basket .ui-button, .basket html .ui-button.ui-state-disabled:hover, .basket html .ui-button.ui-state-disabled:active {
+    background: #009688 !important;
+    border: none !important;
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 20px !important;
+    margin-top: -3px !important;
+}
+
+.basket .custom-slider-container {
+    margin: 10px 0 15px !important;
+}
+
+.datepicker-custom-style {
+    width: 20em !important;
+    font-family: "Dosis", Arial, Helvetica, sans-serif !important;
+}
+
+.datepicker-custom-style th {
+    padding: 0.7em !important;
+    color: #009688 !important;
+    width: 40px;
+}
+
+.datepicker-custom-style td {
+    padding: 3px !important;
+    font-family: "Dosis", Arial, Helvetica, sans-serif !important;
+}
+
+.datepicker-custom-style .ui-state-default, .datepicker-custom-style .ui-widget-content .ui-state-default, .datepicker-custom-style .ui-widget-header .ui-state-default, .datepicker-custom-style .ui-button, .datepicker-custom-style html .ui-button.ui-state-disabled:hover, .datepicker-custom-style html .ui-button.ui-state-disabled:active {
+    border: 0 !important;
+}
+
+.datepicker-custom-style .ui-state-highlight, .datepicker-custom-style .ui-widget-content .ui-state-highlight, .datepicker-custom-style .ui-widget-header .ui-state-highlight {
+    background: #ddd !important;
+    color: #454545 !important;
+}
+
+.datepicker-custom-style .ui-state-active, .datepicker-custom-style .ui-widget-content .ui-state-active, .datepicker-custom-style .ui-widget-header .ui-state-active, .datepicker-custom-style a.ui-button:active, .datepicker-custom-style .ui-button:active, .datepicker-custom-style .ui-button.ui-state-active:hover {
+    background: #009688 !important;
+    color: #fff !important;
+}
+
+.datepicker-custom-style .ui-widget-header {
+    border: 0 !important;
+    background: none !important;
+}

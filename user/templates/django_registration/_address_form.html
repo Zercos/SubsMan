@@ -1,0 +1,72 @@
+<div class="company">
+    <div class="field {% if address_form.business.errors %}error{% endif %}">
+        <label for="user_address_form_business">Business name:*</label>
+        <div class="ui">
+            <input type="text" name="business" id="user_address_form_business" placeholder="Business name">
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field  {% if address_form.company.errors %}error{% endif %}">
+            <label for="user_address_form_company">Company name:*</label>
+            <input type="text" name="company" id="user_address_form_company" placeholder="Company name">
+        </div>
+        <div class="field  {% if address_form.country.errors %}error{% endif %}">
+            <label for="user_address_form_country">Country:*</label>
+            <div class="ui fluid search selection dropdown">
+                <input type="hidden" name="country" id="user_address_form_country" value="us">
+                <i class="dropdown icon"></i>
+                <div class="default text">Select Country</div>
+                {% include 'django_registration/_countries.html' %}
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field  {% if address_form.company_address.errors %}error{% endif %}">
+            <label for="user_address_form_company_address">Company Address:*</label>
+            <input type="text" name="company_address" id="user_address_form_company_address"
+                   placeholder="Company Address">
+        </div>
+        <div class="field  {% if address_form.city.errors %}error{% endif %}">
+            <label for="user_address_form_city">City:*</label>
+            <input type="text" name="city" id="user_address_form_city" placeholder="City">
+        </div>
+    </div>
+    <div class="fields">
+        <div class="eight wide field">
+            <label for="user_address_form_company_address2">Company address 2:</label>
+            <input type="text" name="company_address2" id="user_address_form_company_address2"
+                   placeholder="Company Address 2">
+        </div>
+        <div class="eight wide field">
+            <div class="two fields">
+                <div class="field  {% if address_form.state.errors %}error{% endif %}">
+                    <label for="user_address_form_state">State / Region*:</label>
+                    <input type="text" name="state" id="user_address_form_state" placeholder="State / Region">
+                </div>
+                <div class="field  {% if address_form.postcode.errors %}error{% endif %}">
+                    <label for="user_address_form_postcode">Postcode*:</label>
+                    <input type="text" name="postcode" id="user_address_form_postcode" placeholder="Postcode">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field  {% if address_form.phone.errors %}error{% endif %}">
+            <label for="user_address_form_phone">Phone number*:</label>
+            <input type="text" name="phone" id="user_address_form_phone" placeholder="Phone number">
+        </div>
+    </div>
+</div>
+<h4 class="ui header">Enter your billing information</h4>
+<div class="field  {% if address_form.tax_number.errors %}error{% endif %}">
+    <label for="user_address_form_tax_number">Tax ID:</label>
+    <input type="text" name="tax_number" id="user_address_form_tax_number" placeholder="Tax ID">
+</div>
+<div class="field">
+    <div class="ui checkbox">
+        <input name="user_address_form_for_billing" type="hidden" value="0">
+        <input class="billing_cb" type="checkbox" value="1" checked="checked" name="user_address_form_for_billing"
+               id="user_address_form_for_billing">
+        <label for="user_address_form_for_billing">My billing address is the same as my company address:</label>
+    </div>
+</div>

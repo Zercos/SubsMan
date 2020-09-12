@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Sign up {{ block.super }}{% endblock %}
 {% block content %}
     <h2>Sign up</h2>
@@ -18,58 +19,65 @@
                 <div class="description">Enter your company info</div>
             </div>
         </div>
-        <div class="disabled step account-verification">
-            <i class="envelope open outline icon"></i>
-            <div class="content">
-                <div class="title">Verification</div>
-                <div class="description">Verify your data</div>
-            </div>
-        </div>
     </div>
     <form method="post" class="ui form registration">
         {% csrf_token %}
         <div id="account-info">
             <h4 class="ui header">Account details</h4>
-            {% if form.errors %}
+            {% if form.errors or address_form.errors%}
                 <div id="error_explanation">
                     <h2>Errors prohibited this user from being saved:</h2>
                     <ul>
                         {% for field in form %}
                             {% for error in field.errors %}
-                                <li>{{ error|escape }}</li>
+                                <li>{{ field.label }}: {{ error|escape }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for address_field in address_form %}
+                            {% for error in address_field.errors %}
+                                <li>{{ address_field.label }}: {{ error|escape }}</li>
                             {% endfor %}
                         {% endfor %}
                     </ul>
                 </div>
             {% endif %}
-            <div class="field">
+            <div class="field {% if form.email.errors %}error{% endif %}">
                 {{ form.email.label_tag }}
-                <input type="email" class="form-control {% if form.email.errors %}error{% endif %}" id="id_email"
-                       name="email" placeholder="Your email" value="{{ form.email.value|default:'' }}">
+                <input type="email" id="id_email" name="email" placeholder="Your email"
+                       value="{{ form.email.value|default:'' }}">
             </div>
-            <div class="field">
+            <div class="field {% if form.password1.errors %}error{% endif %}">
                 {{ form.password1.label_tag }}
-                <input type="password" class="{% if form.password1.errors %}error{% endif %}"
-                       id="id_password1" name="password1" value="{{ form.password1.value|default:'' }}">
+                <input type="password" id="id_password1" name="password1" value="{{ form.password1.value|default:'' }}">
             </div>
-            <div class="field">
+            <div class="field {% if form.password2.errors %}error{% endif %}">
                 {{ form.password2.label_tag }}
-                <input type="password" class="{% if form.password2.errors %}error{% endif %}"
-                       id="id_password2" name="password2" value="{{ form.password2.value|default:'' }}">
+                <input type="password" id="id_password2" name="password2" value="{{ form.password2.value|default:'' }}">
             </div>
-            <div class="field">
+            <div class="field {% if form.first.errors %}error{% endif %}">
                 {{ form.first_name.label_tag }}
-                <input type="text" class="{% if form.first_name.errors %}error{% endif %}"
-                       id="first_name" name="first_name" value="{{ form.first_name.value|default:'' }}">
+                <input type="text" id="id_first_name" name="first_name" value="{{ form.first_name.value|default:'' }}">
             </div>
-            <div class="field">
+            <div class="field {% if form.last_name.errors %}error{% endif %}">
                 {{ form.last_name.label_tag }}
-                <input type="text" class="{% if form.last_name.errors %}error{% endif %}"
-                       id="last_name" name="last_name" value="{{ form.last_name.value|default:'' }}">
+                <input type="text" id="id_last_name" name="last_name" value="{{ form.last_name.value|default:'' }}">
+            </div>
+            <div class="actions">
+                <a class="ui button primary sign-up-next">Next</a>
             </div>
         </div>
+        <div id="company-info" style="display: none;">
+            <h4 class="ui header">Tell us more about your company</h4>
+            {% include 'django_registration/_address_form.html' with address_form=address_form %}
+            <div class="ui hidden divider"></div>
+            <a class="ui button primary sign-up-back">Back</a>
+            <input class="ui button green" type="submit" name="commit" value="Submit"/>
+        </div>
         <div class="ui hidden divider"></div>
-        <input class="ui button green" type="submit" name="commit" value="Submit"/>
     </form>
     <div class="ui divider"></div>
+    Already have an account? <a href="{% url 'user:login' %}">Log in</a>
+{% endblock %}
+{% block js %}
+    <script src="{% static "js/addresses.js" %}"></script>
 {% endblock %}
