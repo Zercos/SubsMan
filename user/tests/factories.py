@@ -15,14 +15,12 @@ class UserFactory(factory.django.DjangoModelFactory):
 
 class AddressFactory(factory.django.DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
-    company = factory.Faker('company')
+    address1 = factory.faker.Faker('address')
     phone = factory.faker.Faker('phone_number')
     city = factory.faker.Faker('city')
-    state = factory.faker.Faker('state')
     country = factory.faker.Faker('country')
-    company_address = factory.Faker('address')
-    contact_email = factory.Faker('email')
     postcode = factory.Faker('postcode')
+    is_billing = True
 
     class Meta:
         model = models.Address

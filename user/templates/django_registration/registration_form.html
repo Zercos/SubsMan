@@ -15,8 +15,8 @@
         <div class="step company-info">
             <i class="building outline icon"></i>
             <div class="content">
-                <div class="title">Company Info</div>
-                <div class="description">Enter your company info</div>
+                <div class="title">Address Info</div>
+                <div class="description">Enter your address info</div>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
         {% csrf_token %}
         <div id="account-info">
             <h4 class="ui header">Account details</h4>
-            {% if form.errors or address_form.errors%}
+            {% if form.errors or address_form.errors %}
                 <div id="error_explanation">
                     <h2>Errors prohibited this user from being saved:</h2>
                     <ul>
@@ -67,7 +67,7 @@
             </div>
         </div>
         <div id="company-info" style="display: none;">
-            <h4 class="ui header">Tell us more about your company</h4>
+            <h4 class="ui header">Address information</h4>
             {% include 'django_registration/_address_form.html' with address_form=address_form %}
             <div class="ui hidden divider"></div>
             <a class="ui button primary sign-up-back">Back</a>

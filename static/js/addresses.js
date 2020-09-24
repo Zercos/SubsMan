@@ -1,4 +1,19 @@
 $(document).ready(function () {
+    if ($('.billing_cb').prop('checked')) {
+        $('.billing.address').hide();
+    } else {
+        $('.billing.address').show();
+    }
+    ;
+
+    $('.billing_cb').click(function () {
+        if ($(this).prop('checked')) {
+            $('.billing.address').hide('slow');
+        } else {
+            $('.billing.address').show('slow');
+        }
+    });
+
     function showCompanyInfo() {
         $('#account-info').hide();
         $('#company-info').show();
