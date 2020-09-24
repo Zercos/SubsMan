@@ -14,4 +14,6 @@ urlpatterns: List[URLPattern] = [
     path('login/', LoginView.as_view(form_class=forms.AuthenticationForm), name='login'),
     path('', include('django_registration.backends.one_step.urls')),
     path('', include('django.contrib.auth.urls')),
+    path('account/', views.AccountView.as_view(), name='account'),
+    path('account/edit/', views.AccountUpdateView.as_view(), name='account_edit'),
 ]

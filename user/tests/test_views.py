@@ -2,6 +2,7 @@ from django.test.testcases import TestCase
 from django.urls import reverse
 
 from user.models import User, Address
+from user.tests.factories import UserFactory
 
 
 class TestViews(TestCase):
@@ -63,3 +64,9 @@ class TestViews(TestCase):
         self.assertTrue(User.objects.filter(email='test1@mail.com').exists())
         self.assertTrue(Address.objects.filter(user__email='test1@mail.com').exists())
         self.assertEqual(Address.objects.filter(user__email='test1@mail.com').first().billing_city, 'Kyiv')
+
+    def test_account_page(self):
+        user = UserFactory()
+        self.client.force_login(user)
+        response = self.client.get(reverse('user:account'))
+        self.assertEqual(response.status_code, 200)

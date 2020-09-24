@@ -1,6 +1,9 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, UpdateView
 from django_registration import signals
 from django_registration.backends.one_step.views import RegistrationView
 
@@ -45,3 +48,23 @@ class CustomRegistrationView(RegistrationView):
             return HttpResponseRedirect(self.get_success_url(new_user))
         else:
             return self.render_to_response(self.get_context_data(form=form, address_form=address_form))
+
+
+class AccountView(LoginRequiredMixin, TemplateView):
+    template_name = 'account.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        context['address'] = self.request.user.addresses.first()
+        return context
+
+
+class AccountUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    template_name = 'account_edit.html'
+    fields = ['first_name', 'last_name']
+    success_url = reverse_lazy('user:account')
+
+    def get_object(self, queryset=None):
+        return self.request.user
