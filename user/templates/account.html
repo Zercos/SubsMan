@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}My account - {{ block.super }}{% endblock %}
+{% block content %}
+    <h1>My account</h1>
+
+    <h3>Account details</h3>
+    <ul>
+        <li>Email: {{ user.email }}</li>
+        <li>First name: {{ user.first_name }}</li>
+        <li>Last name: {{ user.last_name }}</li>
+        <li>Created at: {{ user.date_created }}</li>
+        <li>Updated at: {{ user.date_updated }}</li>
+        {% if user.is_superuser %}
+            <li>Is superuser: True</li>
+        {% endif %}
+    </ul>
+    <h3>Address details</h3>
+    <ul>
+        <li>Address: {{ address.address1 }}</li>
+        {% if address.address2 %}
+            <li>Address 2: {{ address.address2 }}</li>
+        {% endif %}
+        <li>Postcode: {{ address.postcode }}</li>
+        <li>City: {{ address.city }}</li>
+        <li>Country: {{ address.country }}</li>
+        <li>Phone: {{ address.phone }}</li>
+        {% if not address.is_billing %}
+            <li>Billing address: {{ address.billing_address1 }}</li>
+            <li>Billing postcode: {{ address.billing_ostcode }}</li>
+            <li>Billing city: {{ address.billing_city }}</li>
+            <li>Billing country: {{ address.billing_country }}</li>
+        {% endif %}
+    </ul>
+    <div class="ui divider"></div>
+    <a href="{% url 'user:account_edit' %}" class="ui button primary">Edit account details</a>
+    <a href="{% url 'user:address_edit' %}" class="ui button orange">Edit address details</a>
+{% endblock %}

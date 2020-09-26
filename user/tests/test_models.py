@@ -21,4 +21,4 @@ class TestModels(TestCase):
 
     def test_create_address(self):
         address = AddressFactory()
-        self.assertTrue(Address.objects.filter(company=address.company, id=address.id).exists())
+        self.assertTrue(Address.objects.filter(id=address.id).exists())
