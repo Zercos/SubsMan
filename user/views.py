@@ -8,7 +8,7 @@ from django_registration import signals
 from django_registration.backends.one_step.views import RegistrationView
 
 from user.forms import RegistrationForm, AddressForm
-from user.models import User
+from user.models import User, Address
 
 
 class CustomRegistrationView(RegistrationView):
@@ -68,3 +68,14 @@ class AccountUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+class AddressUpdateView(LoginRequiredMixin, UpdateView):
+    model = Address
+    template_name = 'address_edit.html'
+    fields = ['address1', 'address2', 'city', 'postcode', 'country', 'phone', 'billing_address1', 'billing_address2',
+              'billing_city', 'billing_country', 'billing_postcode']
+    success_url = reverse_lazy('user:account')
+
+    def get_object(self, queryset=None):
+        return self.request.user.addresses.first()

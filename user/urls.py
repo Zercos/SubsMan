@@ -16,4 +16,5 @@ urlpatterns: List[URLPattern] = [
     path('', include('django.contrib.auth.urls')),
     path('account/', views.AccountView.as_view(), name='account'),
     path('account/edit/', views.AccountUpdateView.as_view(), name='account_edit'),
+    path('account/address/edit/', views.AddressUpdateView.as_view(), name='address_edit'),
 ]

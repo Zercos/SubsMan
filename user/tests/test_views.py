@@ -70,3 +70,17 @@ class TestViews(TestCase):
         self.client.force_login(user)
         response = self.client.get(reverse('user:account'))
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(user, response.context['user'])
+        self.assertEqual(user.addresses.first(), response.context['address'])
+
+    def test_edit_account_page(self):
+        user = UserFactory()
+        self.client.force_login(user)
+        response = self.client.get(reverse('user:account_edit'))
+        self.assertEqual(200, response.status_code)
+
+    def test_edit_address_page(self):
+        user = UserFactory()
+        self.client.force_login(user)
+        response = self.client.get(reverse('user:address_edit'))
+        self.assertEqual(200, response.status_code)

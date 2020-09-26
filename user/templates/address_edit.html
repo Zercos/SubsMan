@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Address edit - {{ block.super }}{% endblock %}
+{% block content %}
+    <h1>Edit my address details</h1>
+    <div class="ui divider"></div>
+    <form method="post" class="ui form edit-account">
+        {% csrf_token %}
+        {% include 'django_registration/_address_form.html' with address_form=form %}
+        <div class="ui hidden divider"></div>
+        <button class="ui button green" type="submit">Save</button>
+        <a href="{% url 'user:account' %}" class="ui button negative">Cancel</a>
+    </form>
+{% endblock %}
+{% block js %}
+    <script src="{% static "js/addresses.js" %}"></script>
+{% endblock %}

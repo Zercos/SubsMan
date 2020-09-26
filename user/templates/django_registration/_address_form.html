@@ -2,12 +2,14 @@
     <div class="two fields">
         <div class="field  {% if address_form.address1.errors %}error{% endif %}">
             <label for="user_address_form_address">Address:*</label>
-            <input type="text" name="address1" id="user_address_form_address" placeholder="Address">
+            <input type="text" name="address1" id="user_address_form_address" placeholder="Address"
+                   value="{{ address_form.address1.value|default:'' }}">
         </div>
         <div class="field  {% if address_form.country.errors %}error{% endif %}">
             <label for="user_address_form_country">Country:*</label>
             <div class="ui fluid search selection dropdown">
-                <input type="hidden" name="country" id="user_address_form_country" value="us">
+                <input type="hidden" name="country" id="user_address_form_country"
+                       value="{{ address_form.country.value|default:'us' }}">
                 <i class="dropdown icon"></i>
                 <div class="default text">Select Country</div>
                 {% include 'django_registration/_countries.html' %}
@@ -18,21 +20,24 @@
         <div class="field  {% if address_form.address2.errors %}error{% endif %}">
             <label for="user_address_form_address2">Address 2 (optional):</label>
             <input type="text" name="address2" id="user_address_form_address2"
-                   placeholder="Address 2">
+                   placeholder="Address 2" value="{{ address_form.address2.value|default:'' }}">
         </div>
         <div class="field  {% if address_form.city.errors %}error{% endif %}">
             <label for="user_address_form_city">City:*</label>
-            <input type="text" name="city" id="user_address_form_city" placeholder="City">
+            <input type="text" name="city" id="user_address_form_city" placeholder="City"
+                   value="{{ address_form.city.value|default:'' }}">
         </div>
     </div>
     <div class="two fields">
         <div class="field  {% if address_form.phone.errors %}error{% endif %}">
             <label for="user_address_form_phone">Phone number*:</label>
-            <input type="text" name="phone" id="user_address_form_phone" placeholder="Phone number">
+            <input type="text" name="phone" id="user_address_form_phone" placeholder="Phone number"
+                   value="{{ address_form.phone.value|default:'' }}">
         </div>
         <div class="field  {% if address_form.postcode.errors %}error{% endif %}">
             <label for="user_address_form_postcode">Postcode*:</label>
-            <input type="text" name="postcode" id="user_address_form_postcode" placeholder="Postcode">
+            <input type="text" name="postcode" id="user_address_form_postcode" placeholder="Postcode"
+                   value="{{ address_form.postcode.value|default:'' }}">
         </div>
     </div>
 </div>
@@ -47,14 +52,16 @@
 </div>
 <div class="billing address">
     <div class="two fields">
-        <div class="field  {% if address_form.billing_address1.errors %}error{% endif %}">
+        <div class="field {% if address_form.billing_address1.errors %}error{% endif %}">
             <label for="user_address_form_billing_address1">Billing address:*</label>
-            <input type="text" name="billing_address1" id="user_address_form_billing_address1" placeholder="Address">
+            <input type="text" name="billing_address1" id="user_address_form_billing_address1" placeholder="Address"
+                   value="{{ address_form.billing_address1.value|default:'' }}">
         </div>
-        <div class="field  {% if address_form.billing_country.errors %}error{% endif %}">
+        <div class=" field {% if address_form.billing_country.errors %}error{% endif %}">
             <label for="user_address_form_billing_country">Billing country:*</label>
             <div class="ui fluid search selection dropdown">
-                <input type="hidden" name="billing_country" id="user_address_form_billing_country" value="us">
+                <input type="hidden" name="billing_country" id="user_address_form_billing_country"
+                       value="{{ address_form.billing_country.value|default:'us' }}">
                 <i class="dropdown icon"></i>
                 <div class="default text">Select Country</div>
                 {% include 'django_registration/_countries.html' %}
@@ -65,15 +72,17 @@
         <div class="field  {% if address_form.billing_address2.errors %}error{% endif %}">
             <label for="user_address_form_billing_address2">Billing address 2 (optional):</label>
             <input type="text" name="billing_address2" id="user_address_form_billing_address2"
-                   placeholder="Address 2">
+                   placeholder="Address 2" value="{{ address_form.billing_address2.value|default:'' }}">
         </div>
-        <div class="field  {% if address_form.billing_city.errors %}error{% endif %}">
+        <div class=" field {% if address_form.billing_city.errors %}error{% endif %}">
             <label for="user_address_form_billing_city">Billing city:*</label>
-            <input type="text" name="billing_city" id="user_address_form_billing_city" placeholder="City">
+            <input type="text" name="billing_city" id="user_address_form_billing_city" placeholder="City"
+                   value="{{ address_form.billing_city.value|default:'' }}">
         </div>
     </div>
-    <div class="field  {% if address_form.billing_postcode.errors %}error{% endif %}">
+    <div class=" field {% if address_form.billing_postcode.errors %}error{% endif %}">
         <label for="user_address_form_billing_postcode">Billing postcode*:</label>
-        <input type="text" name="billing_postcode" id="user_address_form_billing_postcode" placeholder="Postcode">
+        <input type="text" name="billing_postcode" id="user_address_form_billing_postcode" placeholder="Postcode"
+               value="{{ address_form.billing_postcode.value|default:'' }}">
     </div>
 </div>
