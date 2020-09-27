@@ -17,8 +17,11 @@ class Product(models.Model):
 
     objects = ProductManager()
 
+    def __str__(self):
+        return f'<Product: {self.name}>'
+
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='product-images')
     thumbnail = models.ImageField(upload_to='product-thumbnails', null=True, blank=True)
