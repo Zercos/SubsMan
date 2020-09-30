@@ -65,6 +65,5 @@ class AuthenticationForm(forms.Form):
 class AddressForm(forms.ModelForm):
     class Meta:
         model = models.Address
-        fields = ['user', 'business', 'company', 'company_address', 'company_address2', 'city', 'state', 'postcode',
-                  'country', 'phone', 'mobile_phone', 'contact_firstname', 'contact_email', 'contact_lastname',
-                  'contact_title', 'tax_number', 'for_billing']
+        fields = ['user', 'address1', 'address2', 'city', 'postcode', 'country', 'phone', 'billing_address1',
+                  'billing_address2', 'billing_city', 'billing_country', 'billing_postcode']

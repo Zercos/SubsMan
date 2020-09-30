@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - {{ block.super }}{% endblock %}
+{% block content %}
+    <div class="ui segment" style="background: #e7eef5;">
+        <h4>PRODUCTS</h4>
+        <div class="ui hidden divider"></div>
+        <table class="ui small very basic table">
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>
+                        <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}"
+                             style="height: 28px;">
+                    </td>
+                    <td><strong>{{ product.name }}</strong></td>
+                    <td class="status">{{ product.description }}.</td>
+                    <td>
+                        <a href="{{ product.site }}" target="_blank" class="ui button tiny blue">FIND OUT MORE</a>
+                        <a href="#" class="ui button tiny green">PURCHASE</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

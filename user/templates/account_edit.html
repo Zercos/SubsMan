@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Account edit - {{ block.super }}{% endblock %}
+{% block content %}
+    <h1>Edit my account details</h1>
+    <div class="ui divider"></div>
+    <form method="post" class="ui form edit-account">
+        {% csrf_token %}
+        <div class="account-info">
+            <div class="field {% if form.first_name.errors %}error{% endif %}">
+                {{ form.first_name.label_tag }}
+                <input type="text" id="id_first_name" name="first_name" value="{{ form.first_name.value|default:'' }}">
+            </div>
+            <div class="field {% if form.last_name.errors %}error{% endif %}">
+                {{ form.last_name.label_tag }}
+                <input type="text" id="id_last_name" name="last_name" value="{{ form.last_name.value|default:'' }}">
+            </div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <button class="ui button green" type="submit">Save</button>
+        <a href="{% url 'user:account' %}" class="ui button negative">Cancel</a>
+    </form>
+{% endblock %}
