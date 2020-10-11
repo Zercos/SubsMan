@@ -57,12 +57,15 @@ class Plan(models.Model, CreateModMixin):
 
     objects = PlanManager()
 
+    class Meta:
+        ordering = ['id']
+
     def __str__(self):
         return f'<Plan: {self.name}>'
 
 
 class PlanItem(models.Model, CreateModMixin):
-    name = models.CharField('Plan name', null=False, blank=False, max_length=120)
+    name = models.CharField('Item name', null=False, blank=False, max_length=120)
     description = models.CharField('Description', null=True, blank=True, max_length=255)
     value = models.CharField('Value', null=False, blank=False, max_length=255)
     value_unit = models.CharField('Value unit', null=False, blank=False, max_length=120)
