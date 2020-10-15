@@ -52,3 +52,7 @@
     border: 0 !important;
     background: none !important;
 }
+
+.ui.segment .card {
+    background-color: #F2F8FD;
+}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Plans - {{ block.super }}{% endblock %}
+{% block content %}
+    <div class="ui segment">
+        <div class="ui three column grid">
+            {% for plan in plan_list %}
+                <div class="column">
+                    <div class="ui fluid card">
+                        <div class="content">
+                            <div class="header" style="text-align: center;">{{ plan.name }}</div>
+                            <div class="description" style="text-align: center;">{{ plan.description }}</div>
+                            <div class="ui divider"></div>
+                            <div class="ui two column right aligned grid">
+                                {% for item in plan.items.all %}
+                                    <div class="right aligned column">{{ item.name }}</div>
+                                    <div class="left aligned column">
+                                        <strong>{{ item.value }}-{{ item.value_unit }}</strong>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
