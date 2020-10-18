@@ -19,6 +19,12 @@
                                 {% endfor %}
                             </div>
                         </div>
+                        <a href="{% url 'main:add_to_basket' %}?plan_id={{ plan.id }}">
+                            <div class="ui bottom attached button">
+                                <i class="add icon"></i>
+                                Add to basket
+                            </div>
+                        </a>
                     </div>
                 </div>
             {% endfor %}

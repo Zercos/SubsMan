@@ -1,6 +1,7 @@
 import factory.fuzzy
 
 from main import models
+from user.tests.factories import UserFactory
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
@@ -26,3 +27,18 @@ class PlanFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = models.Plan
+
+
+class BasketFactory(factory.django.DjangoModelFactory):
+    user = factory.SubFactory(UserFactory)
+
+    class Meta:
+        model = models.Basket
+
+
+class BasketItemFactory(factory.django.DjangoModelFactory):
+    basket = factory.SubFactory(BasketFactory)
+    plan = factory.SubFactory(PlanFactory)
+
+    class Meta:
+        model = models.BasketItem

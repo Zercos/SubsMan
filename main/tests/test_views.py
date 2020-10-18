@@ -19,3 +19,13 @@ class TestViews(TestCase):
         self.assertEqual(200, response.status_code)
         self.assertEqual(3, len(response.context['page_obj']))
         self.assertEqual(product.plans.active().all()[0], response.context['plan_list'][0])
+
+    def test_add_to_basket(self):
+        user = UserFactory()
+        product = ProductFactory()
+        plan = PlanFactory(product=product)
+
+        self.client.force_login(user)
+        self.client.get(reverse('main:add_to_basket'), {'plan_id': plan.id})
+        self.assertTrue(user.basket_set.filter(user=user).exists())
+        self.assertTrue(user.basket_set.filter(user=user).first().basketitem_set.filter(plan=plan).exists())
