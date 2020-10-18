@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 
 from user.models import User
@@ -92,3 +93,22 @@ class Subscription(models.Model, CreateModMixin):
 
     def __str__(self):
         return f'<Subscription of plan:{self.plan.name}>'
+
+
+class Basket(models.Model, CreateModMixin):
+    OPEN = 10
+    SUBMITTED = 20
+    STATUSES = ((OPEN, 'Open'), (SUBMITTED, 'Submitted'))
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    status = models.IntegerField(choices=STATUSES, default=OPEN, null=True, blank=True)
+
+    @property
+    def count(self):
+        return sum(i.quantity for i in self.basketitem_set.all())
+
+
+class BasketItem(models.Model, CreateModMixin):
+    basket = models.ForeignKey(Basket, on_delete=models.CASCADE)
+    plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1)])

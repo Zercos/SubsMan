@@ -17,7 +17,8 @@
 {% else %}
     <div class="ui visible inverted left vertical sidebar default">
         <div>
-            <a href="/"><img src="{% static "logo.png" %}" class="nhm-logo" alt="logo" style="height: 100px; width: 100px"/></a>
+            <a href="/"><img src="{% static "logo.png" %}" class="nhm-logo" alt="logo"
+                             style="height: 100px; width: 100px"/></a>
         </div>
         <div class="welcome">Welcome to SubsMan!</div>
         <div class="infotext">Please login or create new account to continue with product checkout.</div>
@@ -28,10 +29,13 @@
         {% if user.is_authenticated %}{% include 'header.html' %}{% endif %}
         <div class="ui grid padded" style="padding: 0 10px;">
             <div class="sixteen wide column">
-                <div class="ui segment">
-                    {% block content %}
-                    {% endblock %}
+                <div class="basket-container">
+                    {% if request.basket.count %}
+                        {% include '_basket.html' with basket=request.basket %}
+                    {% endif %}
                 </div>
+                {% block content %}
+                {% endblock %}
             </div>
         </div>
     </div>

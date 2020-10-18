@@ -12,7 +12,7 @@
     <div class="six wide computer six wide tablet sixteen wide mobile column right aligned" id="notifications">
         <div class="notification-button ui icon top right pointing dropdown button basket-open">
             <i class="shopping basket icon"></i>
-            <span class="button__badge">{% if request.basket %}1{% else %}0{% endif %} </span>
+            <span class="button__badge">{% if request.basket %}{{ request.basket.count }}{% else %}0{% endif %} </span>
         </div>
         <div class="ui dropdown icon top right pointing">
             <div class="user-avatar-header">

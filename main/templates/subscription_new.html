@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}New subscription{% endblock %}
+{% block content %}
+    <div class="ui segment">
+        <div class="ui grid">
+            <div class="six wide column">
+                <img src="{{ plan.product.images.first.image.url }}" alt="{{ plan.product.name }}"
+                     style="height: 28px;">
+                <h3>
+                    <div><strong>{{ plan.name }}</strong></div>
+                </h3>
+                <h5>
+                    <div>{{ plan.price }} {{ plan.currency_code | upper }}</div>
+                </h5>
+            </div>
+            <div class="ten wide column">
+                <div class="ui two column right aligned grid">
+                    {% for item in plan.items.all %}
+                        <div class="right aligned column" title="{{ item.description }}">
+                            {{ item.name }}
+                        </div>
+                        <div class="left aligned column">
+                            <strong>{{ item.value }}-{{ item.value_unit }}</strong>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="ui divider"></div>
+        <a href="{% url 'main:create_subscription' plan.id %}" class="ui button positive">Create Subscription</a>
+    </div>
+{% endblock %}

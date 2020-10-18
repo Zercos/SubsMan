@@ -1,0 +1,10 @@
+<div class="ui segment">
+    <div class="ui three column grid basket">
+        <div style="position: absolute; right: 20px; top: 10px; font-size: 18px; cursor: pointer; z-index: 2"
+             class="basket-close">x
+        </div>
+        {% for item in basket.basketitem_set.all %}
+            {% include '_plan_card.html' with plan=item.plan basket_item=item %}
+        {% endfor %}
+    </div>
+</div>
