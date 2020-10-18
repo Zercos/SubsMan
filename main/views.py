@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views.generic import TemplateView, ListView
@@ -38,4 +38,31 @@ def add_to_basket(request):
     if not created:
         basket_item.quantity += 1
         basket_item.save()
+    return HttpResponseRedirect(reverse('main:home'))
+
+
+@login_required
+def delete_basket_item(request, basket_item_id):
+    basket = request.basket
+    if not basket:
+        raise Http404('No basket provided')
+    basket_item = get_object_or_404(BasketItem, pk=basket_item_id)
+    basket_item.delete()
+    return HttpResponseRedirect(reverse('main:home'))
+
+
+class SubscriptionNewView(LoginRequiredMixin, TemplateView):
+    template_name = 'subscription_new.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        plan_id = self.request.GET.get('plan_id')
+        plan = get_object_or_404(Plan, pk=plan_id)
+        ctx['plan'] = plan
+        return ctx
+
+
+@login_required
+def create_subscription(request, plan_id):
+    plan = get_object_or_404(Plan, pk=plan_id)
     return HttpResponseRedirect(reverse('main:home'))
