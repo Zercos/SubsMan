@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Plans - {{ block.super }}{% endblock %}
+{% block content %}
+    <div class="ui segment">
+        <div class="ui three column grid">
+            {% for plan in plan_list %}
+                {% include '_plan_card.html' with plan=plan %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

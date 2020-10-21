@@ -16,7 +16,7 @@
                     <td class="status">{{ product.description }}.</td>
                     <td>
                         <a href="{{ product.site }}" target="_blank" class="ui button tiny blue">FIND OUT MORE</a>
-                        <a href="#" class="ui button tiny green">PURCHASE</a>
+                        <a href="{% url 'main:plans' product.id %}" class="ui button tiny green">PLANS</a>
                     </td>
                 </tr>
             {% endfor %}
