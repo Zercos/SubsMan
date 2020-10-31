@@ -1,3 +1,6 @@
+import datetime as ddt
+
+from dateutil.relativedelta import relativedelta
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, Http404
@@ -5,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views.generic import TemplateView, ListView
 
+from main.forms import SubscriptionForm
 from main.models import Product, Plan, Basket, BasketItem
 
 
@@ -65,4 +69,13 @@ class SubscriptionNewView(LoginRequiredMixin, TemplateView):
 @login_required
 def create_subscription(request, plan_id):
     plan = get_object_or_404(Plan, pk=plan_id)
-    return HttpResponseRedirect(reverse('main:home'))
+    plan_terms = {plan.period_unit: plan.period}
+    this_time = ddt.datetime.now()
+    # noinspection PyTypeChecker
+    term_end = this_time + relativedelta(**plan_terms)
+    subscription_data = dict(plan=plan, user=request.user, term_start=this_time,
+                             term_end=term_end, status='New')
+    subscription_form = SubscriptionForm(subscription_data)
+    if subscription_form.is_valid():
+        subscription_form.save()
+        return HttpResponseRedirect(reverse('main:home'))
