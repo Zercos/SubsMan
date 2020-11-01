@@ -11,4 +11,6 @@ urlpatterns = [
     path('delete-from-basket/<int:basket_item_id>/', views.delete_basket_item, name='delete_from_basket'),
     path('subscriptions/new/', views.SubscriptionNewView.as_view(), name='subscription_new'),
     path('subscription/create/<int:plan_id>/', views.create_subscription, name='create_subscription'),
+    path('subscriptions/', views.SubscriptionListView.as_view(), name='subscriptions'),
+    path('subscriptions/<int:pk>/', views.SubscriptionUpdateView.as_view(), name='subscription_update'),
 ]

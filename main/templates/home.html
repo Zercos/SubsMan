@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Dashboard - {{ block.super }}{% endblock %}
 {% block content %}
+    {% if subscriptions %}
+        {% include '_subscriptions_list.html' with subscriptions=subscriptions %}
+    {% endif %}
     <div class="ui segment" style="background: #e7eef5;">
         <h4>PRODUCTS</h4>
         <div class="ui hidden divider"></div>
