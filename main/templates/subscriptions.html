@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Your subscriptions - {{ block.super }}{% endblock %}
+{% block content %}
+    {% if subscription_list %}
+        {% include '_subscriptions_list.html' with subscriptions=subscription_list %}
+    {% else %}
+        <div class="ui segment">
+            <h4>YOU DON'T HAVE SUBSCRIPTIONS YET</h4>
+        </div>
+    {% endif %}
+{% endblock %}

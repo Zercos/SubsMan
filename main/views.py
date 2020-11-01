@@ -1,11 +1,15 @@
+import datetime as ddt
+
+from dateutil.relativedelta import relativedelta
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
-from django.urls import reverse
-from django.views.generic import TemplateView, ListView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import TemplateView, ListView, UpdateView
 
-from main.models import Product, Plan, Basket, BasketItem
+from main.forms import SubscriptionForm
+from main.models import Product, Plan, Basket, BasketItem, Subscription
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -14,6 +18,7 @@ class HomeView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['products'] = Product.objects.active().all()
+        context['subscriptions'] = self.request.user.subscriptions.all()[:5]
         return context
 
 
@@ -65,4 +70,34 @@ class SubscriptionNewView(LoginRequiredMixin, TemplateView):
 @login_required
 def create_subscription(request, plan_id):
     plan = get_object_or_404(Plan, pk=plan_id)
-    return HttpResponseRedirect(reverse('main:home'))
+    plan_terms = {plan.period_unit: plan.period}
+    this_time = ddt.datetime.now()
+    # noinspection PyTypeChecker
+    term_end = this_time + relativedelta(**plan_terms)
+    subscription_data = dict(plan=plan, user=request.user, term_start=this_time,
+                             term_end=term_end, status='New')
+    subscription_form = SubscriptionForm(subscription_data)
+    if subscription_form.is_valid():
+        subscription_form.save()
+        return HttpResponseRedirect(reverse('main:home'))
+
+
+class SubscriptionListView(LoginRequiredMixin, ListView):
+    template_name = 'subscriptions.html'
+    model = Subscription
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user=self.request.user)
+
+
+class SubscriptionUpdateView(LoginRequiredMixin, UpdateView):
+    model = Subscription
+    template_name = 'subscription_update.html'
+    fields = ['recurring', 'plan']
+    success_url = reverse_lazy('main:subscriptions')
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['plans'] = self.object.plan.product.plans.all()
+        return ctx

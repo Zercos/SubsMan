@@ -7,7 +7,6 @@ import main.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('main', '0003_auto_20201001_2044'),
@@ -22,13 +21,18 @@ class Migration(migrations.Migration):
                 ('description', models.CharField(blank=True, max_length=255, null=True, verbose_name='Description')),
                 ('price', models.DecimalField(decimal_places=2, max_digits=8, verbose_name='Price')),
                 ('period', models.IntegerField(blank=True, null=True, verbose_name='Period')),
-                ('period_unit', models.CharField(choices=[('day', 'Day'), ('week', 'Week'), ('month', 'Month'), ('year', 'Year')], max_length=20, verbose_name='Period unit')),
+                ('period_unit',
+                 models.CharField(choices=[('day', 'Day'), ('week', 'Week'), ('month', 'Month'), ('year', 'Year')],
+                                  max_length=20, verbose_name='Period unit')),
                 ('active', models.BooleanField(blank=True, default=True, verbose_name='Active')),
-                ('currency_code', models.CharField(choices=[('us', 'USD'), ('eur', 'EUR'), ('pln', 'PLN')], max_length=10, verbose_name='Currency')),
+                ('currency_code',
+                 models.CharField(choices=[('us', 'USD'), ('eur', 'EUR'), ('pln', 'PLN')], max_length=10,
+                                  verbose_name='Currency')),
                 ('recurring', models.BooleanField(blank=True, default=False, verbose_name='Recurring')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='plans', to='main.Product')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='plans',
+                                              to='main.Product')),
             ],
-            bases=(models.Model, main.models.CreateModMixin),
+            bases=[models.Model],
         ),
         migrations.CreateModel(
             name='Subscription',
@@ -39,10 +43,12 @@ class Migration(migrations.Migration):
                 ('term_start', models.DateTimeField(blank=True, null=True, verbose_name='Term start')),
                 ('term_end', models.DateTimeField(blank=True, null=True, verbose_name='Term end')),
                 ('active', models.BooleanField(blank=True, default=True, verbose_name='Active')),
-                ('plan', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='subscriptions', to='main.Plan')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='subscriptions', to=settings.AUTH_USER_MODEL)),
+                ('plan', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='subscriptions',
+                                           to='main.Plan')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='subscriptions',
+                                           to=settings.AUTH_USER_MODEL)),
             ],
-            bases=(models.Model, main.models.CreateModMixin),
+            bases=[models.Model],
         ),
         migrations.CreateModel(
             name='PlanItem',
@@ -52,8 +58,9 @@ class Migration(migrations.Migration):
                 ('description', models.CharField(blank=True, max_length=255, null=True, verbose_name='Description')),
                 ('value', models.CharField(max_length=255, verbose_name='Value')),
                 ('value_unit', models.CharField(max_length=120, verbose_name='Value unit')),
-                ('plan', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items', to='main.Plan')),
+                ('plan',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items', to='main.Plan')),
             ],
-            bases=(models.Model, main.models.CreateModMixin),
+            bases=[models.Model],
         ),
     ]
