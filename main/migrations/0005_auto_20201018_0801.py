@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('status', models.IntegerField(blank=True, choices=[(10, 'Open'), (20, 'Submitted')], default=10, null=True)),
                 ('user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
-            bases=(models.Model, main.models.CreateModMixin),
+            bases=[models.Model],
         ),
         migrations.AlterModelOptions(
             name='plan',
@@ -41,6 +41,6 @@ class Migration(migrations.Migration):
                 ('basket', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.Basket')),
                 ('plan', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.Plan')),
             ],
-            bases=(models.Model, main.models.CreateModMixin),
+            bases=[models.Model],
         ),
     ]

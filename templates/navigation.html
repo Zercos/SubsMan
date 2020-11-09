@@ -2,9 +2,10 @@
     <a class="item {% if request.resolver_match.url_name == '' %}active{% endif %}" href="/">Dashboard</a><br>
     <a class="item {% if request.resolver_match.url_name == 'account' %}active{% endif %}"
        href="{% url 'user:account' %}">My account</a>
-    <a class="item {% if request.resolver_match.url_name == 'invoices' %}active{% endif %}" href="#">My invoices</a>
-    <a class="item {% if request.resolver_match.url_name == 'users' %}active{% endif %}" href="#">Users</a>
+    <a class="item {% if request.resolver_match.url_name == 'subscriptions' %}active{% endif %}"
+       href="{% url 'main:subscriptions' %}">My subscriptions</a>
+    <a class="item {% if request.resolver_match.url_name == 'users' %}active{% endif %}" href="#">Products</a>
     <a class="item {% if request.resolver_match.url_name == 'payment_sources' %}active{% endif %}" href="#">
-        Payment Sources
+        Plans
     </a>
 </div>

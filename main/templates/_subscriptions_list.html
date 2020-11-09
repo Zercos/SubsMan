@@ -1,0 +1,33 @@
+<div class="ui segment">
+    <h4>YOUR SUBSCRIPTIONS</h4>
+    <div class="ui hidden divider"></div>
+    <table class="ui small very basic table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Product</th>
+            <th>Plan</th>
+            <th>Purchase date</th>
+            <th>Expiration date</th>
+            <th>Renewing</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for subscription in subscriptions %}
+            <tr>
+                <td>
+                    <img src="{{ subscription.plan.product.images.first.image.url }}" alt="{{ product.name }}"
+                         style="height: 28px;">
+                </td>
+                <td><strong>{{ subscription.plan.product.name }}</strong></td>
+                <td><strong>{{ subscription.plan.name }}</strong></td>
+                <td>{{ subscription.term_start|date:"SHORT_DATE_FORMAT" }}</td>
+                <td>{{ subscription.term_end|date:"SHORT_DATE_FORMAT" }}</td>
+                <td>{{ subscription.recurring|yesno }}</td>
+                <td><a href="{% url 'main:subscription_update' subscription.id %}" class="ui button tiny orange">Manage</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

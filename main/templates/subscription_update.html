@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Edit your subscription - {{ block.super }}{% endblock %}
+{% block content %}
+    <div class="ui segment">
+        <h4>Edit your subscription</h4>
+        <form method="post" class="ui form">
+            {% if form.errors %}
+                <div id="error_explanation">
+                    <h2>Errors prohibited this user from being saved:</h2>
+                    <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ field.label }}: {{ error|escape }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            {% csrf_token %}
+            <div class="field">
+                <div class="ui selection dropdown">
+                    <input type="hidden" name="plan" value="{{ form.plan.value|default:'' }}">
+                    <i class="dropdown icon"></i>
+                    <div class="default text">{{ object.plan.name }}</div>
+                    <div class="menu">
+                        {% for plan in plans %}
+                            <div class="item" data-value="{{ plan.id }}">{{ plan.name }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui checkbox">
+                    <input name="subscription_update_recurring" type="hidden" value="0">
+                    <input class="recurring_subscription" type="checkbox" value="1"
+                           {% if form.recurring.value %}checked{% endif %} name="recurring"
+                           id="subscription_update_recurring">
+                    <label for="subscription_update_recurring">Renewing subscription</label>
+                </div>
+            </div>
+            <div class="ui divider"></div>
+            <input class="ui button green" type="submit" name="commit" value="Submit"/>
+        </form>
+    </div>
+{% endblock %}
