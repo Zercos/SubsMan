@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 factory-boy = "*"
+isort = "*"
 
 [packages]
 django = "==3.0.7"
