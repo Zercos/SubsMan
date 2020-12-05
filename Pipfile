@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 factory-boy = "*"
+isort = "*"
 
 [packages]
 django = "==3.0.7"
@@ -17,6 +18,9 @@ django-registration = "==3.1"
 pillow = "*"
 ipython = "*"
 django-environ = "*"
+celery = {extras = ["redis"],version = "*"}
+vine = "*"
+django-celery-results = {file = "https://github.com/celery/django-celery-results/zipball/master"}
 
 [requires]
 python_version = "3.8"

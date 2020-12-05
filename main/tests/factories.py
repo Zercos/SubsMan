@@ -1,3 +1,6 @@
+import datetime as ddt
+from datetime import timezone
+
 import factory.fuzzy
 
 from main import models
@@ -42,3 +45,15 @@ class BasketItemFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = models.BasketItem
+
+
+class SubscriptionFactory(factory.django.DjangoModelFactory):
+    status = 'Active'
+    plan = factory.SubFactory(PlanFactory)
+    user = factory.SubFactory(UserFactory)
+    term_start = factory.fuzzy.FuzzyDateTime(ddt.datetime(2020, 5, 10, tzinfo=timezone.utc))
+    term_end = factory.fuzzy.FuzzyDateTime(ddt.datetime(2020, 5, 12, tzinfo=timezone.utc))
+    active = True
+
+    class Meta:
+        model = models.Subscription

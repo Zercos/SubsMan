@@ -3,10 +3,10 @@ import logging
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UsernameField, UserCreationForm as DjangoRegistrationForm
-from django.core.mail import send_mail
 from django_registration import validators
 
 from user import models
+from user.tasks import send_welcome_email_to_user
 
 logger = logging.getLogger(__name__)
 
@@ -32,10 +32,9 @@ class RegistrationForm(DjangoRegistrationForm):
         self.fields['email'].required = True
 
     def send_welcome_email(self):
-        logger.info(f'Sending signup email for {self.cleaned_data["email"]}')
-        message = 'Welcome to SubsMan, the subscription management system.'
-        send_mail(subject='SubsMan welcome', message=message, from_email='site@subsman.com',
-                  recipient_list=(self.cleaned_data.get('email'),), fail_silently=True)
+        email = self.cleaned_data.get('email')
+        send_task = send_welcome_email_to_user.delay(email)
+        logger.info(f'Send a welcome task to {email}, task: {send_task.id}')
 
 
 class AuthenticationForm(forms.Form):
