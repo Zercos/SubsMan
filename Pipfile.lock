@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "416c8c8e9d8d4914d18bf565204309ed422dc909a09d0bac5223516f72ef4b2d"
+            "sha256": "9eb4561b0aae24d4b1674f2cece8e5d2f8ea9d35c2b62c32639be4ad6e1b0357"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -112,11 +112,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:5052b34b34b3425233c682e0e11d658fd6efd587d11335a0203d827224ada8f2",
-                "sha256:e1630333248c9b3d4e38f02093a26f1e07b271ca896d73097457996e0fae12e8"
+                "sha256:169e2e7b4839a7910b393eec127fd7cbae62e80fa55f89c6510426abf673fe5f",
+                "sha256:c6c0462b8b361f8691171af1fb87eceb4442da28477e12200c40420176206ba7"
             ],
             "index": "pypi",
-            "version": "==3.0.7"
+            "version": "==3.1.6"
         },
         "django-celery-results": {
             "file": "https://github.com/celery/django-celery-results/zipball/master"
